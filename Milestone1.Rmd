@@ -1,9 +1,9 @@
 ---
 Title: "Data Analysis Milestone 1" 
 Author: "Shreya Verma"
-output: 
-  html_document:
-    keep_md: true
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 ## Overview
