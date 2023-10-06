@@ -5,7 +5,7 @@ Author: "Shreya Verma"
 
 ## Overview
 
-The report included the Exploratory Data Analysis, that was performed on a data set chosen from the `datateacher` package. Over the course of the report, you will be familiarized with different types of data set. The final one data set will be used to formulate four research questions.
+The report included the Exploratory Data Analysis, that was performed on a data set chosen from the `datateacher` package. Over the course of the report, you will be familiarized with different types of data set. The final data set will be used to formulate four research questions
 
 ## Setting up
 
