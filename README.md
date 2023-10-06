@@ -21,4 +21,4 @@ The corrected code can be run from files [*Milestone1*](/Milestone1.Rmd) using `
 
 ## Contributers
 
-For any further questions or inquiries, please reach out to Shreya Verma ([shreyav1\@gmail.com](mailto:shreyav1@gmail.com){.email})
+For any further questions or inquiries, please reach out to Shreya Verma ([shreyav1\@gmail.com](mailto:shreyav1@gmail.com))
