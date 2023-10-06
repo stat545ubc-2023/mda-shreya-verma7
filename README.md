@@ -1,6 +1,6 @@
 ## Overview
 
-This is a individual project for UBC course [*STAT 545A*](https://stat545.stat.ubc.ca/syllabus-545a/). The central objective is to perform exploratory data analysis using R and GitHub workflow. The focus is to perform the analysis using best practices for clean code writing, reproducibility, and thinking clarity in order to impact and engage the reader productively. The progress is as of 05<sup>th</sup> October 2023:
+This is an individual project for UBC course [*STAT 545A*](https://stat545.stat.ubc.ca/syllabus-545a/). The central objective is to perform exploratory data analysis using R and GitHub workflow. The focus is to perform the analysis using best practices for clean code writing, reproducibility, and thinking clarity in order to impact and engage the reader productively. The progress is as of 05<sup>th</sup> October 2023:
 
 -   [x] Mini data analysis 1
     -   Glancing different data sets and choosing one through iteratively exploration.
