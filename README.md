@@ -12,7 +12,7 @@ This is an individual project for UBC course [*STAT 545A*](https://stat545.stat.
 
 ## Project Files
 
-1.  **Milestone1**: Report rendered in Github friendly format.
+1.  [*Milestone1*](/Milestone1.md) Report rendered in Github friendly format.
 2.  [*Milestone1.Rmd*](/Milestone1.rmd): Corresponding file containing the `R` code for the
 
 ## Code execution
