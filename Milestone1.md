@@ -1,9 +1,6 @@
 ---
 Title: "Data Analysis Milestone 1" 
 Author: "Shreya Verma"
-output: 
-  html_document:
-    keep_md: true
 ---
 
 ## Overview
