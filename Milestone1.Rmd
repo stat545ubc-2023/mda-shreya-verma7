@@ -59,7 +59,7 @@ All the 7 data sets look very interesting, but the ones that I am specifically i
 
 In this section, we will individually perform introductory exploration into the four chosen data sets using dyplr to find the associated data attributes. The goal is to understand the information contained within each data set and enable a more informed decision.
 
-####Building Permits
+#### Building Permits
 
 ```{r}
 # Checking the object type of data frame 
