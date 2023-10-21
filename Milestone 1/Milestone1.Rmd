@@ -1,0 +1,271 @@
+---
+Title: "Data Analysis Milestone 1" 
+Author: "Shreya Verma"
+output:
+  md_document:
+    variant: markdown_github
+---
+
+## Overview
+
+The report included the Exploratory Data Analysis, that was performed on a data set chosen from the `datateacher` package. Over the course of the report, you will be familiarized with different types of data set. The final data set will be used to formulate four research questions
+
+## Setting up
+
+First we need to load the following two packages:
+
+```{r}
+# Installing packages if missing, required only once
+# install.packages("devtools")
+# devtools::install_github("UBC-MDS/datateachr")
+
+library(datateachr)
+library(tidyverse)
+```
+
+## Data set
+
+The `datateachr` is comprised of the 7 semi-tidy data sets:
+
+**Tip** : help(package = "datateachr") helps us understand the package and it's function!
+
+> 1.  apt_buildings: Acquired courtesy of The City of Toronto's Open Data Portal. It currently has 3455 rows and 37 columns.
+
+> 2.  building_permits: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 20680 rows and 14 columns.
+
+> 3.  cancer_sample: Acquired courtesy of UCI Machine Learning Repository. It currently has 569 rows and 32 columns.
+
+> 4.  flow_sample: Acquired courtesy of The Government of Canada's Historical Hydrometric Database. It currently has 218 rows and 7 columns.
+
+> 5.  parking_meters: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 10032 rows and 22 columns.
+
+> 6.  steam_games: Acquire d courtesy of Kaggle. It currently has 40833 rows and 21 columns.
+
+> 7.  vancouver_trees: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 146611 rows and 20 columns.
+
+## Task 1.1: Preliminary Data set Selection
+
+All the 7 data sets look very interesting, but the ones that I am specifically intrigued in look are:
+
+1: *building_permits:* Vancouver rent is expensive! My building manager always gives me a reply that "it is hard to get building permits", so I want to understand what is the whole deal about it!
+
+2: *cancer_sample:* I am a cancer survivor and this research topic is very close to my heart. I have previously worked on early detection of skin care.
+
+3:*parking_meters:* Just learning how to drive! Parking meters sure do pay a very important part in Vancouver. I want to find parking spots that are mostly free.
+
+4: *vancouver_trees:* Fall is here! It will be really cool if I can see the species of trees on different streets. Also, curious to see how city plans planting the trees.
+
+## Task 1.2: Introductory Data set Exploration
+
+In this section, we will individually perform introductory exploration into the four chosen data sets using dyplr to find the associated data attributes. The goal is to understand the information contained within each data set and enable a more informed decision.
+
+#### Building Permits
+
+```{r}
+# Checking the object type of data frame 
+class(building_permits)
+```
+
+```{r}
+# Let us now see the dimensions, columns and data types
+glimpse(building_permits)
+```
+
+```{r}
+#The newly learnt summary function to help "summarize" the data
+summary(building_permits)
+```
+
+```{r}
+# To get a better sense of data, I am more interested in knowing the count per year. Is it really hard to get builing permits now(like my building manager says) or has it always been an issue?
+building_permits %>% 
+  group_by(year) %>%
+  summarise(n=n())
+```
+
+```{r}
+# Let us see different permit types
+distinct(building_permits, type_of_work)
+```
+
+**Notable Observation:** Referring back to summary, we can see there are 52 missing numerical values.
+
+#### Cancer Sample
+
+```{r}
+# Making a practice to check the object type of data frame 
+class(cancer_sample)
+```
+
+```{r}
+# Let us now see the dimensions, columns and data types
+glimpse(cancer_sample)
+```
+
+```{r}
+# One of the most important aspect of Biomedical research is  nominal and ordinal data, therefore let us summarise the data
+summary(cancer_sample)
+```
+
+```{r}
+# Curious to see the type of diagnosis
+distinct(cancer_sample, diagnosis)
+```
+
+```{r}
+#It is clear the data has both Malignat and Begnin tumors. But, now I want to see how big can a tumor get?  What is the mean radius between the diagnosis?
+cancer_sample %>% 
+  group_by(diagnosis) %>%
+  summarize(meanRadius=mean(radius_mean))
+```
+
+**Notable Observation:** Here is the catch! There is difference between mean radius of benign and malignant tumor. May be this can help me classify them?
+
+#### Parking Meters
+
+```{r}
+# Always checking the object type of data frame 
+class(parking_meters)
+```
+
+```{r}
+# Analysing dataframe dimensions, columns, and data types 
+glimpse(parking_meters)
+```
+
+```{r}
+# Function to provides result summaries
+summary(parking_meters)
+```
+
+```{r}
+# Let's find parking spots! 
+parking_meters %>% 
+  group_by(geo_local_area) %>%
+  arrange(geo_local_area) %>%
+  summarize(n=n())
+```
+
+**Notable Observation** **:** Only a Vancouverite can understand the pain of having most parking meters in Downtown and still not able to find parking!
+
+#### Vancouver Trees
+
+```{r}
+# Checking the object type of data frame 
+class(vancouver_trees)
+```
+
+```{r}
+# Checking Dataframe dimensions, columns, and data types 
+glimpse(vancouver_trees)
+```
+
+```{r}
+# Function to provides result summaries
+summary(vancouver_trees)
+```
+
+```{r}
+# Determining distinct genus-specie pairs! Let's find beautiful fall trees
+distinct(vancouver_trees, genus_name, species_name)
+```
+
+**Notable Observation:** There are 361 different pairs of genus-species combinations.
+
+## Task 1.3: Intermediate Data set Selection
+
+The four data sets were very interesting, but two problems that stood out to be are:
+
+1.  *cancer_sample*
+2.  *building_permits*
+
+As much as I am interested in exploring the **building permits** and resolving the "why is my rent so expensive" issue, I think I am more inclined towards **cancer sample**. Like I mentioned, I am a survivor myself and already during EDA I can see there might be a scope to classify the tumors! I see a ray of hope.
+
+## Task 1.4: Final Data set Selection
+
+Final decision did come easy to me, thanks to EDA! I was able to (preliminary) identify attribute, mean radius, that can help me classify the tumor to Malignant or Benign. I want to further explore and see if I can find more attributes. It is a very personal research problem and area I have been very passionately working towards. I am very curious about bias in data set too.
+
+## Task 2: Detailed Exploration and Reasoning for plot choices.
+
+Please find a detailed investigation of the data set **cancer sample** below. The goal is to understand about data characteristics, trends and insights, which will then eventually help in formulating research questions.
+
+#### 2.1.1: Plotting distribution of numeric variable 'radius_mean' between the two (response) classes
+
+-   EDA helped us understand that the data set comprises mostly of numerical values.
+-   'radius_mean' was chosen, since cancer cells are larger in size.
+-   Finally, a density plot is the correct choice since as our response variable is binary (classification) and not numerical (regression). Therefore, a density plot much better reveals the distribution of radius_mean across the output categories.
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(radius_mean))+
+  geom_density(aes(fill=diagnosis, alpha=0.3))
+```
+
+**Note** There is a correlation between radius_mean and diagnosis classification.
+
+**Challenge** There is also a significant overlap in values across the classifications it, which means we need to add other appropriate variables to our model.
+
+#### 2.1.4.a: Exploring the relationship between two variables 'radius_mean' and 'symmetry_mean'
+
+-   My curiosity peaked, I wonder if larger (malignant) cells are very different from smaller (benign) cells in regards to symmetry. This also based on a research paper I read!
+-   Exploring relationship between radius and area, using scatter plots, will highlight the degree or correlation.
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(radius_mean, symmetry_mean))+
+  geom_point(aes(colour=diagnosis, size=0.3, alpha=0.3))
+```
+
+Unfortunately, It can be seen that there is not a correlation between 'radius_mean' and 'symmetry_mean'. Let us move on and below we explore another variable with respect to 'radius_mean'.
+
+#### 2.1.4.b: Exploring the relationship between two variables 'radius_mean' and 'concave_points_mean'
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(radius_mean, concave_points_mean))+
+  geom_point(aes(colour=diagnosis, size=0.3, alpha=0.3))
+```
+
+Voila! It can be seen that there is a strong relationship (i.e. correlation) between 'radius_mean' and 'concave_points_mean'.
+
+#### 2.1.6: Using box plot to examine frequency of variable 'area_mean'.
+
+-   Box plots provide a lot of detail on numerical attributes and are thus selected to contrast the 'radius_mean' which is already shown above to be a strong dependent variable.
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(diagnosis, area_mean))+
+  geom_boxplot(width=0.3)
+```
+
+#### 2.1.8: Using density plot to explore related variables 'radius_mean', 'radius_se', and 'radius_worst'
+
+-   Density plots are very applicable for my data set as they compare the dependent variables nicely across the two classification outputs. Thus using another density plot to investigate suitability of variable 'fractal_dimension-mean'
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(fractal_dimension_mean))+
+  geom_density(aes(fill=diagnosis, alpha=0.3))
+```
+
+Having an almost identical distribution overlapping on each other, shows us that 'fractal_dimension_mean' is not a strong dependent variable.
+
+One of the key indicators of Breast Cancer is texture. I want to explore the relationship between radius_mean and texture_mean.
+
+```{r}
+cancer_sample %>%
+  ggplot(aes(radius_mean, texture_mean))+
+  geom_point(aes(colour=diagnosis, size=0.3, alpha=0.3))
+```
+
+I was expecting to see a correlation and that would have been very interesting to further explore. Unfortunately, we don't see a strong relationship.
+
+## Task 3: Research Questions
+
+1.  **Can a model classify the binary response of benign or malignant given the set of variables?**
+
+2.  **Is (variable) data distribution and characteristics comparable between the benign and malignant classes?**
+
+3.  **How can we find the optimized set of variables so that we have the highest performance? Which variable has the strongest correlation to the response variable**
+
+4.  Model sensitivity is an important factor. Therefore, we need **identify what variables lead to highest model sensitivity?**
